@@ -3,21 +3,11 @@ const bodyParser = require('body-parser');
 const { MongoClient } = require('mongodb');
 const dotenv = require('dotenv').config();
 const ejs = require('ejs');
-//const sslRedirect = require('heroku-ssl-redirect').default
 
 const app = express();
 const port = process.env.PORT
 const uri = process.env.MONGO_URI
 const client = new MongoClient(uri);
-
-/*if(process.env.NODE_ENV === 'production') {
-  app.use((req, res, next) => {
-    if (req.header('x-forwarded-proto') !== 'https')
-      res.redirect(`https://${req.header('host')}${req.url}`)
-    else
-      next()
-  })
-}*/
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -65,7 +55,6 @@ app.put('/quotes', (req, res) => {
       upsert: true
     }
     )
-    //.then(result => result.json('Success'))
     .catch(error => console.error(error))
 })
 
