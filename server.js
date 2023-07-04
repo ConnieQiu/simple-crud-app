@@ -14,7 +14,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(bodyParser.json());
 
-
 app.get('/', async(req, res) => {
   await client.connect(uri);
   const cursor = client.db('sw-quotes').collection('quotes').find().toArray()
